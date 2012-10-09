@@ -3,3 +3,5 @@ This implementation uses google app engine to get a one click setup of a passwor
 The passwords are encrypted in the front end and only the encrypted version of the password is sent via the wire.
 
 You can just upload the application to google apps engine and try it out.
+
+For installation and howto guide, READ: http://hackinghabits.com/2012/10/09/do-you-trust-your-password-manager/
