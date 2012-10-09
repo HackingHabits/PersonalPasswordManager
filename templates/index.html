@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>#engage</title>
+	<meta content="Social Recruiting starts here. Refer a friend for a job to help, make money, earn reputation and for some fun! HashEngage is the social recruiting platform." name="description">
+	<meta itemprop="image" content="../assets/google_favicon_128.png">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script language="javascript" type="text/javascript" src="/assets/js/sjcl.js"></script>	
+	<script language="javascript" type="text/javascript" src="/assets/js/jquery-1.8.2.min.js"/></script>
+	<script language="javascript" type="text/javascript" src="/assets/js/custom.js"/></script>	
+	<script language="javascript" type="text/javascript" src="/assets/js/keyboard.js"></script>
+	
+	<link href="/assets/css/normalize.css" rel="stylesheet">
+	<link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/assets/css/bootstrap-responsive.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
+	<style type="text/css">
+		body{
+			margin:5px;
+		}
+	</style>
+</head>
+<body>
+<div class="container">
+	<div class="marketing">
+	
+		<div class="row-fluid">
+		Welcome, {{ user.nickname() }} <a href="{{ logout_url }}">sign out</a>
+		</div>
+<hr class="soften">			
+
+		<div class="row-fluid">
+		<h4>Master Password</h4>
+			    <div>
+			      <input  type="password" autocomplete="off" type="text" id="masterPassword" placeholder="Your master password" name="website"/>
+			      <i class="icon-th" onclick="toggle_keyboard()"></i>
+				 {% include "keyboard.html" %}
+				</div>			      
+		</div>		
+		</div>
+		<div class="row-fluid">
+			<h4>Secure new password</h4>			
+			<form class="form-horizontal" onsubmit="return false;">
+			  <div class="control-group">
+			    
+			    <div>
+			      <input  autocomplete="off" type="text" id="inputWebsite" placeholder="Ref: e.g. http://gmail.com" name="website"/>
+			    </div>
+			  </div>
+			  <div class="control-group">
+			    
+			    <div >
+			      <input  autocomplete="off" type="password" id="inputPassword" placeholder="****************************" name="password">
+			    </div>
+			  </div>
+			  <div class="control-group">
+			    <div>
+			      <button type="submit" class="btn" value="Add" onclick="encrypt_new_password(this)">Encrypt and save!</button>
+			    </div>
+			  </div>
+			</form>
+		</div>		
+<hr class="soften">		
+		<div class="row-fluid">
+			<table class="table span6 table-condensed table-hover">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Website</th>
+                  <th>Password</th>
+                  <th>Decrypt</th>
+                  <th>Delete</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+              	{% for passwd in passwds %}
+                <tr>    
+                	<td>{{ loop.index }}</td>            
+                	<td>
+                		<span>{{ passwd.website|truncate(killwords=True,length=15) }}</span>
+                		<span class="hide">{{ passwd.website }}</span>                	
+                	</td>
+                	<td>                		
+						<span>*******</span>
+						<span class="hide">{{ passwd.password }}</span>                		               	
+                	</td>
+                	<td><a href="javascript:void(0);" onclick="decrypt_password('{{ passwd.password }}', {{ passwd.key().id() }})" class="label label-success">decrypt</a></td>
+                	<td><a href="/delete/{{ passwd.key().id() }}" class="label">delete</a></td>
+                	<td><span class="secret_password" id="decrypt_password_{{ passwd.key().id() }}"></span></td>
+                </tr>  
+                {% endfor %}           
+              </tbody>
+            </table>
+		</div>
+	</div>
+</div>
+</body>

@@ -1,0 +1,5 @@
+There are a number of password managers online. How about one that you manage yourself and is easy to setup.
+This implementation uses google app engine to get a one click setup of a password manager that is personal to you.
+The passwords are encrypted in the front end and only the encrypted version of the password is sent via the wire.
+
+You can just upload the application to google apps engine and try it out.

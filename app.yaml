@@ -1,0 +1,11 @@
+application: my-password
+version: 2
+runtime: python
+api_version: 1
+
+
+handlers:
+- url: /.*
+  script: app.py
+  login: required
+  secure: always
